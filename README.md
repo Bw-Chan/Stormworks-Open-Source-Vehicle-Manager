@@ -33,4 +33,6 @@ Then there is the Max Vehicle Count which dictates how many vehicles each player
 
 And lastly the defaults, they tell the onPlayerJoin function what data the players should start with regarding their pvp and anti-steal state.
 
-I would not recconmend AT ALL turning the anti-steal state to false because that allows other players to steal other's creations and you dont want that, being the couragous, illustrious and generous dictator- I mean Server Owner that you are. (obvious joking)
+I would not recommend AT ALL turning the anti-steal state to false because that allows other players to steal other's creations and you dont want that, being the couragous, illustrious and generous dictator- I mean Server Owner that you are. (obvious joking)
+
+As for the pvp well that is up to you prefferably it should be false so no one ends up being killed and stirring up arguements.

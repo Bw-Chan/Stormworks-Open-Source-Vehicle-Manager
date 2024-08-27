@@ -46,3 +46,5 @@ Here if you like artworks this will surely help you understand a bit better.
 
 ![Illustration](https://github.com/user-attachments/assets/8d5b23b8-a701-4c22-9f5e-5e4b317a92dd)
 
+In code it is represented as: ` group_id = {vehicle_id,vehicle_id} `
+

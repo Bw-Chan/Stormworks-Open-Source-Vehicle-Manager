@@ -53,8 +53,10 @@ GROUP = {vehicle_id,vehicle_id} --These are the vehicles in that group (dont act
 ```
 
 The First vehicle_id is in index 1 (in other languages that is usually 0 but lua likes being special)
+
 The second vehicle_id is in index 2
-so to get the car I would have to:
+
+So to get the car I would have to:
 
 ```
 GROUP = server.getVehicleGroup(1)

@@ -41,6 +41,7 @@ As for the pvp well that is up to you prefferably it should be false so no one e
 
 ## ?help Commands
 ### (For Copy and pasting incase you deleted it in the auth script :P)
+make sure to edit the (pg 2/3) part accordingly
 ```
 	{
 		"===Vehicle Management (pg 2/3)===",

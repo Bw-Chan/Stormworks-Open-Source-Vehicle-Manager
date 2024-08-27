@@ -36,3 +36,13 @@ And lastly the defaults, they tell the onPlayerJoin function what data the playe
 I would not recommend AT ALL turning the anti-steal state to false because that allows other players to steal other's creations and you dont want that, being the couragous, illustrious and generous dictator- I mean Server Owner that you are. (obvious joking)
 
 As for the pvp well that is up to you prefferably it should be false so no one ends up being killed and stirring up arguements.
+
+## The scary advanced stuff
+
+As for the rest of the script it can be a bit harder to understand because of the way stormworks handles its vehicles.
+I'll make this as simple as I can, Vehicles in stormworks are called groups so any loose objects that you spawn with your car/train/helicopter/whatever.. is classed as another vehicle within that group.
+
+Here if you like artworks this will surely help you understand a bit better.
+
+![Illustration](https://github.com/user-attachments/assets/8d5b23b8-a701-4c22-9f5e-5e4b317a92dd)
+

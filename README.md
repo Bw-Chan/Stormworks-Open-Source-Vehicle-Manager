@@ -6,6 +6,8 @@ If you have any issues feel free to contact me, discord: bwchan (I will also kee
 
 > Please credit me if you can, if you do not want to then well me big sad.
 
+Note: Using Visual Studio Code will help a ton with reading these things and writing but it will slow down testing a little.
+
 This handles more advanced functions like:
 - Vehicle Manipulation
 - Player data state toggles
@@ -68,5 +70,9 @@ vehicle_two = GROUP[2]
 -- vehicle_one and vehicle_two would have the id's of the vehicles in tha image above.
 ```
 
-This should have hopefully given you a better understanding of why there are so many goddamn for loops and if statements doing checks and stuff but yeah going through lists is great fun
+This should have hopefully given you a better understanding of why there are so many goddamn for loops and if statements doing checks and stuff but yeah going through lists is great fun.
+
+Stormworks does have its own doccumentation that you can find in-game in the addon menu. There are alternative doccumentation on websites but in my opinion nothing can beat a quick easy access to the in-game docs.
+![image](https://github.com/user-attachments/assets/a69fb7e5-6656-4a7b-8bb6-d9db3b562ea7)
+
 

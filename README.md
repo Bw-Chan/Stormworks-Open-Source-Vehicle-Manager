@@ -1,4 +1,4 @@
-# Stormworks-Open-Source-Vehicle-Manger
+![image](https://github.com/user-attachments/assets/668d2434-2c65-4d94-ba8b-6fa4e50a9c61)# Stormworks-Open-Source-Vehicle-Manger
 
 This is the second part of your Server! yay
 
@@ -46,5 +46,23 @@ Here if you like artworks this will surely help you understand a bit better.
 
 ![Illustration](https://github.com/user-attachments/assets/8d5b23b8-a701-4c22-9f5e-5e4b317a92dd)
 
-In code it is represented as: ` group_id = {vehicle_id,vehicle_id} `
+In code it is represented as: 
+```
+GROUP = server.getVehicleGroup(group_id) -- Groups have Id's attached to them so you can quick refer to them
+GROUP = {vehicle_id,vehicle_id} --These are the vehicles in that group (dont actually do this part in code this is a visual repersentation)
+```
+
+The First vehicle_id is in index 1 (in other languages that is usually 0 but lua likes being special)
+The second vehicle_id is in index 2
+so to get the car I would have to:
+
+```
+GROUP = server.getVehicleGroup(1)
+vehicle_one = GROUP[1] --this gets the list outputted from the instruction above and looks for index 1
+-- therefore getting my car :D
+-- If I wanted the caravan I would do
+vehicle_two = GROUP[2]
+
+-- vehicle_one and vehicle_two would have the id's of the vehicles in tha image above.
+```
 

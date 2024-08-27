@@ -60,7 +60,6 @@ make sure to edit the (pg 2/3) part accordingly
 	"?setpvp [player_id] [true/false] {EXPERIMENTAL}" ,
 	"?remove [Vehicle_id]",
 	"?vehlist - Displays the players name, ID and vehicles spawned"
-}
 
 ```
 ## The scary advanced stuff

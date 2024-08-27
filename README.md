@@ -20,7 +20,7 @@ Saves me having to repeat myself :P
 
 ![image](https://github.com/user-attachments/assets/d16a959f-61ef-499e-a6f5-d483bed6df3a)
 
-For this script's config there.. isnt very much to congigure because it is just more of a background work horse script.
+For this script's config there.. isnt very much to configure because it is just more of a background work horse script.
 The Manager name is what will show up on the UI for displaying basic information like:
 
 ![image](https://github.com/user-attachments/assets/cd2acb31-7758-415b-a727-e6e67506d2f9)

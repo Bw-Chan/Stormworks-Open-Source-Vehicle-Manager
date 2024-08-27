@@ -68,3 +68,5 @@ vehicle_two = GROUP[2]
 -- vehicle_one and vehicle_two would have the id's of the vehicles in tha image above.
 ```
 
+This should have hopefully given you a better understanding of why there are so many goddamn for loops and if statements doing checks and stuff but yeah going through lists is great fun
+

@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/668d2434-2c65-4d94-ba8b-6fa4e50a9c61)# Stormworks-Open-Source-Vehicle-Manger
+# Stormworks-Open-Source-Vehicle-Manger
 
 This is the second part of your Server! yay
 

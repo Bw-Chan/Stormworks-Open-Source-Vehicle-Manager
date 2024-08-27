@@ -57,7 +57,7 @@ make sure to edit the (pg 2/3) part accordingly
 
 	},
 --admin commands
-	"?setpvp [player_id] [true/false] {EXPERIMENTAL}" ,
+	"?setpvp [player_id] [true/false]" ,
 	"?remove [Vehicle_id]",
 	"?vehlist - Displays the players name, ID and vehicles spawned"
 

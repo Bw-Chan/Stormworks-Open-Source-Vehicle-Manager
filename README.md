@@ -43,6 +43,7 @@ As for the pvp well that is up to you prefferably it should be false so no one e
 ### (For Copy and pasting incase you deleted it in the auth script :P)
 make sure to edit the (pg 2/3) part accordingly
 ```
+--player commands
 	{
 		"===Vehicle Management (pg 2/3)===",
  	"?c [vehicle_id] - Clear up your slected vehicle, if left empty will despawn all of them",
@@ -55,6 +56,12 @@ make sure to edit the (pg 2/3) part accordingly
 	"See more: ?help [page]"
 
 	},
+--admin commands
+	"?setpvp [player_id] [true/false] {EXPERIMENTAL}" ,
+	"?remove [Vehicle_id]",
+	"?vehlist - Displays the players name, ID and vehicles spawned"
+}
+
 ```
 ## The scary advanced stuff
 

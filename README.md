@@ -42,9 +42,9 @@ As for the pvp well that is up to you prefferably it should be false so no one e
 ## ?help Commands
 ### (For Copy and pasting incase you deleted it in the auth script :P)
 ```
-  {
-    "===Vehicle Management (pg 2/3)===",
-  "?c [vehicle_id] - Clear up your slected vehicle, if left empty will despawn all of them",
+	{
+		"===Vehicle Management (pg 2/3)===",
+ 	"?c [vehicle_id] - Clear up your slected vehicle, if left empty will despawn all of them",
 	"?r [vehicle_id] - Repairs your selected vehicle, if left empty will repair all of them",
 	"?tpveh [vehicle_id] - Teleports your vehicle to you",
 	"?as - Toggles your Anti_steal for all vehicles",
@@ -53,7 +53,7 @@ As for the pvp well that is up to you prefferably it should be false so no one e
 	"",
 	"See more: ?help [page]"
 
-    },
+	},
 ```
 ## The scary advanced stuff
 

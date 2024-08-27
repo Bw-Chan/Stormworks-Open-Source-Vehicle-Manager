@@ -31,6 +31,6 @@ KEEP THINGS SIMPLE AND NON OBSTRUCTIVE FOR YOUR PLAYERS! but the option to toggl
 
 Then there is the Max Vehicle Count which dictates how many vehicles each player can have I'd reconmend 1 per player but you can do what you want.
 
-And lastly the defaults they tell the onPlayerJoin function what data the players should start with regarding their pvp and anti-steal state.
+And lastly the defaults, they tell the onPlayerJoin function what data the players should start with regarding their pvp and anti-steal state.
 
 I would not recconmend AT ALL turning the anti-steal state to false because that allows other players to steal other's creations and you dont want that, being the couragous, illustrious and generous dictator- I mean Server Owner that you are. (obvious joking)

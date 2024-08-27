@@ -39,6 +39,22 @@ I would not recommend AT ALL turning the anti-steal state to false because that 
 
 As for the pvp well that is up to you prefferably it should be false so no one ends up being killed and stirring up arguements.
 
+## ?help Commands
+### (For Copy and pasting incase you deleted it in the auth script :P)
+```
+  {
+    "===Vehicle Management (pg 2/3)===",
+  "?c [vehicle_id] - Clear up your slected vehicle, if left empty will despawn all of them",
+	"?r [vehicle_id] - Repairs your selected vehicle, if left empty will repair all of them",
+	"?tpveh [vehicle_id] - Teleports your vehicle to you",
+	"?as - Toggles your Anti_steal for all vehicles",
+	"?pvp - Toggles invulnerability for all vehicles",
+	"?ui - Toggles that pesky UI",
+	"",
+	"See more: ?help [page]"
+
+    },
+```
 ## The scary advanced stuff
 
 As for the rest of the script it can be a bit harder to understand because of the way stormworks handles its vehicles.

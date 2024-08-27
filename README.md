@@ -75,4 +75,4 @@ This should have hopefully given you a better understanding of why there are so 
 Stormworks does have its own doccumentation that you can find in-game in the addon menu. There are alternative doccumentation on websites but in my opinion nothing can beat a quick easy access to the in-game docs.
 ![image](https://github.com/user-attachments/assets/a69fb7e5-6656-4a7b-8bb6-d9db3b562ea7)
 
-
+This is as much as I will probably explain for now. I will probably add to this the more people ask about it, the only confusion I could probably of guessed was with the way vehicles work in the game :P

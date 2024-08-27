@@ -49,7 +49,7 @@ Here if you like artworks this will surely help you understand a bit better.
 In code it is represented as: 
 ```
 GROUP = server.getVehicleGroup(group_id) -- Groups have Id's attached to them so you can quick refer to them
-GROUP = {vehicle_id,vehicle_id} --These are the vehicles in that group (dont actually do this part in code this is a visual repersentation)
+GROUP = {1,2} --These are the vehicle_id's in that group (dont actually do this part in code this is a visual repersentation)
 ```
 
 The First vehicle_id is in index 1 (in other languages that is usually 0 but lua likes being special)

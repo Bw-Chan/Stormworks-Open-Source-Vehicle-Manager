@@ -69,7 +69,7 @@ function onPlayerJoin(steam_id, name, peer_id, is_admin, is_auth) --Adds player 
 end
 --Removed the player from g_savedate
 function onPlayerLeave(steam_id, name, peer_id, is_admin, is_auth) --Removes player from g_savedata players
-	for _,i in pairs(players) do
+	for _,i in pairs(g_savedata["players"]) do
 		if peer_id == i[2] then
 			for p,o in pairs(i[3]) do
 				server.despawnVehicleGroup(o, true)
@@ -84,10 +84,10 @@ end
 --When a group spawns several checks happen to go through g_savedata
 --and compairs Id's to make sure a vehicle is put into the correct player's vehicle list.
 function onGroupSpawn(group_id, peer_id,x,y,z,cost)
-	VEHICLES = server.getVehicleGroup(group_id)
-	players = g_savedata["players"]
-	GroupList = players[3]
-	name = server.getPlayerName(peer_id)
+	local VEHICLES = server.getVehicleGroup(group_id)
+	local players = g_savedata["players"]
+	local GroupList = players[3]
+	local name = server.getPlayerName(peer_id)
 	for _,i in pairs(players) do
 		if i[2] == peer_id then
 			table.insert(g_savedata["players"][_][3],1,tostring(group_id))
@@ -103,9 +103,9 @@ end
 -- Removes the vehicle group from a player's vehicle table
 -- Also quick note why the fuck is there no onGroupDespawn? Would of made things a little simpler
 function onVehicleDespawn(vehicle_id, peer_id)
-	VEHICLE_DATA, is_success = server.getVehicleData(vehicle_id)
-	group_id = VEHICLE_DATA["group_id"]
-	players = g_savedata["players"]
+	local VEHICLE_DATA, is_success = server.getVehicleData(vehicle_id)
+	local group_id = VEHICLE_DATA["group_id"]
+	local players = g_savedata["players"]
 	for _,i in pairs(players) do
 		if peer_id == i[2] then
 			for a,group_idF in pairs(i[3]) do
@@ -165,7 +165,8 @@ end
 function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one, two, three, four, five)
     local command = command:lower()
     local players = g_savedata["players"]
-    --DEFBUG--
+    --DEBUG--
+    --[[
     if (command == "?list") then
         local text = ""
             for _,i in pairs(g_savedata["players"]) do
@@ -173,6 +174,7 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
             end
         
     end
+    ]]--
 
     --VEHICLE MANIPULATION COMMANDS--
 
@@ -220,11 +222,9 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
         for _,i in pairs(players) do
             if peer_id == i[2] then --does a check for player
                 local Player_Position = server.getPlayerPos(peer_id)
-                server.announce("Flip","Seems fine")
                 --Gets all group_id's from player's data
                 --This is only big because of the fact you can choose to specify a group :P
                 for a,group_id in pairs(i[3]) do
-                    server.announce("Flip","Seems fine")
                     local VEHICLES = server.getVehicleGroup(group_id)
                     if one then
                         --The idea here is that I can do a check when the player specifies a group
@@ -236,8 +236,7 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
                             --gets the x y z
                             x,y,z = matrix.position(VehicleMatrix)
                             --sets the translation of the vehicle_id by x y z
-                            server.setGroupPos(tonumber(vehicle_id), matrix.translation(x,y+1,z))
-                            server.announce("Flip","Seems fine")
+                            server.setVehiclePos(tonumber(vehicle_id), matrix.translation(x,y+1,z))
                             break
                         end
                     else
@@ -247,8 +246,7 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
 
                             x,y,z = matrix.position(VehicleMatrix)
 
-                            server.setGroupPos(tonumber(vehicle_id), matrix.translation(x,y+1,z))
-                            server.announce("Flip","Seems fine")
+                            server.setVehiclePos(tonumber(vehicle_id), matrix.translation(x,y+1,z))
                         end
                     end
                 end

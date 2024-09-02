@@ -313,7 +313,7 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
             for p,group_id in pairs(i[3]) do
                 VLPP = VLPP..tostring(group_id).."\n" --Vehicle list per player
             end
-            plistT = plistT .."Name: " ..tostring(i[1]).." , ".."ID: "..tostring(i[2]).."\n"..VLPP
+            plistT = plistT .."Name: " ..tostring(i[1]).." , ".."ID: "..tostring(math.ceil(i[2])).."\n"..VLPP
         end
         server.announce("[Admin Tools]", plistT, (peer_id))
     end

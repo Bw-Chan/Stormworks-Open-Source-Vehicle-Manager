@@ -91,6 +91,9 @@ vehicle_one = GROUP[1] --this gets the list outputted from the instruction above
 vehicle_two = GROUP[2]
 
 -- vehicle_one and vehicle_two would have the id's of the vehicles in tha image above.
+
+-- I can then use vehicle_one here to receive information like: tags, authors, name and others
+VEHICLE_DATA = server.getVehicleData(vehicle_one)
 ```
 
 This should have hopefully given you a better understanding of why there are so many goddamn for loops and if statements doing checks and stuff but yeah going through lists is great fun.

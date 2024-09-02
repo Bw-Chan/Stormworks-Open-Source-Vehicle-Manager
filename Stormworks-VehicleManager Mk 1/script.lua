@@ -321,7 +321,7 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
     if (command == "?setpvp") and is_admin then
         if one and two then --One = target_player Two = state
             for _,i in pairs(players) do
-                if i[2] == one then
+                if i[2] == tonumber(one) then
                     local tobool={ ["true"]=true, ["false"]=false }
                     togglePVP(tonumber(one),tobool[two:lower()])
                 end

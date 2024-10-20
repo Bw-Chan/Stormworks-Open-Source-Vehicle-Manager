@@ -37,7 +37,7 @@ And lastly the defaults, they tell the onPlayerJoin function what data the playe
 
 I would not recommend AT ALL turning the anti-steal state to false because that allows other players to steal other's creations and you dont want that, being the couragous, illustrious and generous dictator- I mean Server Owner that you are. (obvious joking)
 
-As for the pvp well that is up to you prefferably it should be false so no one ends up being killed and stirring up arguements.
+As for the pvp well that is up to you, preferably it should be false so no one ends up being killed and stirring up arguements.
 
 ## ?help Commands
 ### (For Copy and pasting incase you deleted it in the auth script :P)

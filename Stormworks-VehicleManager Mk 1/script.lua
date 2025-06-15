@@ -174,6 +174,34 @@ function onTick(game_ticks)
 	end
 end
 
+function printVehicleInfo(group_id,peer_id)
+    group_id = tonumber(group_id)
+    VEHICLES = server.getVehicleGroup(group_id)
+    VEHICLE_DATA, is_success = server.getVehicleData(VEHICLES[1])
+    LOADED_VEHICLE_DATA, is_success = server.getVehicleComponents(VEHICLES[1])
+
+    local name = VEHICLE_DATA["name"]
+    local authors = ""
+    if VEHICLE_DATA["authors"] ~= nil then --might never actually do anything
+        for _,i in pairs(VEHICLE_DATA["authors"]) do
+            authors = authors.." "
+        end
+    end
+    local mass = LOADED_VEHICLE_DATA["mass"]
+    local voxel_count = LOADED_VEHICLE_DATA["voxels"]
+
+    local lines = {
+    "=== ["..tostring(group_id).."] ===",
+    "Name: "..name,
+    "Authors: "..authors,
+    "Mass: "..string.format("%.2f",tostring(mass)).."kg",
+    "Voxel Count: "..voxel_count,
+    }
+    for _,i in pairs(lines) do
+        server.announce("[Vehicle Info]",i,(peer_id))
+    end
+end
+
 function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one, two, three, four, five)
     local command = command:lower()
     local players = g_savedata["players"]
@@ -290,7 +318,23 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
             end
         end
     end
-        
+    
+    --Info
+    if (command == "?vinfo" or command == "?vehicle" or command == "?vi") then
+        for _,i in pairs(players) do
+            if peer_id == i[2] then
+                if one then
+                    printVehicleInfo(one,peer_id)
+                else
+                    for a,group_id in pairs(i[3]) do
+                        printVehicleInfo(group_id,peer_id)
+                    end
+                end
+            end
+        end
+
+    end
+
     --VEHICLE SETTINGS COMMANDS--
         
     --Player PvP Toggle
@@ -326,7 +370,7 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
     --ADMIN VEHICLE COMMANDS--
     --Displays a list of players and their vehicles
     if is_admin then
-    if (command == "?vehlist") then
+    if (command == "?vehlist" or command == "?vl") then
         plistT = ""
         for _,i in pairs(players) do
             VLPP = ""

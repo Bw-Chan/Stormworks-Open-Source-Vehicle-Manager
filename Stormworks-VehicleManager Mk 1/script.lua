@@ -7,7 +7,7 @@
 
 g_savedata = {
     --Dont need to touch this
-    -- ["players"] = {{name,peer_id,{vehicle_group_id,...},Anti_steal_State,Pvp_State,UI_State},....}
+    -- ["players"] = {{name,peer_id,{vehicle_group_id,...},Anti_steal_State,Pvp_State,UI_State,PvP_Ui_State},....}
     ["players"] = {},
     -- # Configuration # --
     ["Manager_Name"] = "BW-VM mk1", --For vehicle info popups/UI
@@ -46,6 +46,11 @@ function toggleUI(index,peer_id,state)
 	server.notify(peer_id, "[UI]", "Toggled State: "..tostring(state), 8)
 end
 
+function togglePvPUI(index,peer_id,state)
+    g_savedata["players"][index][7] = state
+    server.notify(peer_id, "[PVP UI]", "Toggled State: "..tostring(state), 8)
+end
+
 --#      MAIN SCRIPT        #--
 -- Change at your discretion --
 
@@ -63,7 +68,7 @@ function onPlayerJoin(steam_id, name, peer_id, is_admin, is_auth) --Adds player 
 	local AntiSteal = g_savedata["Default_AS_Value"]
 	local PVP = g_savedata["Default_PVP_Value"]
 	local UI = true --always true (player can toggle this off)
-	table.insert(g_savedata["players"],1,{name,peer_id,{},AntiSteal,PVP,UI})
+	table.insert(g_savedata["players"],1,{name,peer_id,{},AntiSteal,PVP,UI,false})
 	
 end
 --Removed the player from g_savedate
@@ -80,14 +85,13 @@ function onPlayerLeave(steam_id, name, peer_id, is_admin, is_auth) --Removes pla
 		end
 	end
 end
+
 --When a group spawns several checks happen to go through g_savedata
 --and compairs Id's to make sure a vehicle is put into the correct player's vehicle list.
 function onGroupSpawn(group_id, peer_id,x,y,z,cost)
 	local VEHICLES = server.getVehicleGroup(group_id)
 	local players = g_savedata["players"]
-	local GroupList = players[3]
 	local name = server.getPlayerName(peer_id)
-    local delete = false
 	for _,i in pairs(players) do
 		if i[2] == peer_id then
 			table.insert(g_savedata["players"][_][3],1,tostring(group_id))
@@ -99,6 +103,22 @@ function onGroupSpawn(group_id, peer_id,x,y,z,cost)
 			server.notify(i[2], g_savedata["Manager_Name"], "Spawned Vehicle ID: \n"..group_id, 5)
 		end
 	end
+    if g_savedata["noWorkshop"] then
+        local VEHICLE_DATA, is_success = server.getVehicleData(VEHICLES[1])
+        steam_id = obtainSteamID(peer_id)
+        for _,i in pairs(VEHICLE_DATA["authors"]) do
+            authorLength = #i
+            if steam_id ~= i.steam_id then --if not the same
+                if _ >= authorLength then --are we at the end of the list?
+                    server.notify(-1, g_savedata["Manager_Name"], name.." has potential workshop.",11)
+                end
+            elseif steam_id == i.steam_id then
+                break
+            end
+        end
+    end
+    
+
 	--Should limit the vehicles spawned by the player
 	for _,i in pairs(g_savedata["players"]) do
 		local VehicleCount = #i[3] --gets the length of the vehicles in a player's data
@@ -127,10 +147,8 @@ function onVehicleDespawn(vehicle_id, peer_id)
 	
 end
 
---this function updates the UI
-function updateUI(peer_id)
-	
-	--obtain information
+function obtainPlayerInfo(peer_id)
+    --obtain information
 	for _,i in pairs(g_savedata["players"]) do
 		if peer_id == i[2] then
 			peer_id = i[2]
@@ -138,8 +156,15 @@ function updateUI(peer_id)
 			UI = i[6] --gets UI state
 			PVP = i[5] --gets PVP state
 			AntiSteal = i[4] --gets AntiSteal state
+            PVP_UI = i[7]
 		end
 	end
+    return peer_id,vehicles,UI,PVP,AntiSteal,PVP_UI
+end
+
+--this function updates the UI
+function updateUI(peer_id)
+	peer_id,vehicles,UI,PVP,AntiSteal,PVP_UI = obtainPlayerInfo(peer_id)
 	
 	if UI then
 		local vehs=""
@@ -161,6 +186,21 @@ function updateUI(peer_id)
 	end
 end
 
+function updatePvPUI(peer_id)
+    peer_id,vehicles,UI,PVP,AntiSteal,PVP_UI = obtainPlayerInfo(peer_id) --get data from player
+    if PVP_UI then
+        local text = "PvP List: \n"
+        for _,player in pairs(g_savedata["players"]) do
+            if player[5] then
+                text = text..player[1].."\n"
+            end
+        end
+        server.setPopupScreen(peer_id, 2, name, true, text,0.9,0)
+    else
+        server.removePopup(peer_id, 2)
+    end
+end
+
 -- and makes sure you dont die with pvp off and
 -- Makes sure you dont go over the set amount of vehicles
 function onTick(game_ticks)
@@ -171,6 +211,7 @@ function onTick(game_ticks)
 			server.setCharacterData(character_id, 100, true, false)
 		end
         updateUI(item[2]) --updates UI for peer_id every tick (shockingly more reliable)
+        updatePvPUI(item[2])
 	end
 end
 
@@ -184,7 +225,7 @@ function printVehicleInfo(group_id,peer_id)
     local authors = ""
     if VEHICLE_DATA["authors"] ~= nil then --might never actually do anything
         for _,i in pairs(VEHICLE_DATA["authors"]) do
-            authors = authors.." "
+            authors = authors..i.name.." "
         end
     end
     local mass = LOADED_VEHICLE_DATA["mass"]
@@ -318,7 +359,7 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
             end
         end
     end
-    
+
     --Info
     if (command == "?vinfo" or command == "?vehicle" or command == "?vi") then
         for _,i in pairs(players) do
@@ -336,7 +377,14 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
     end
 
     --VEHICLE SETTINGS COMMANDS--
-        
+    if (command == "?pvpl" or command == "?pvp_list") then
+        for index,item in pairs(players) do
+            if item[2] == peer_id then
+                togglePvPUI(index,peer_id,not item[7])
+                break
+            end
+        end
+    end
     --Player PvP Toggle
     if (command=="?pvp") then
         for index,item in pairs(players) do
@@ -400,14 +448,10 @@ function onCustomCommand(full_message, peer_id, is_admin, is_auth, command, one,
         if one then
             for _,i in pairs(players) do
                 for a,group_id in pairs(players[_][3]) do
-                    if group_id == tonumber(one) then
-                        server.announce("[Admin Tools]","Attempting to remove vehicle"..group_id,(peer_id))
-						is_success = server.despawnVehicleGroup(tonumber(one), true)
-						if is_success then
-                        	table.remove(g_savedata["players"][_][3],a)
-
-							break
-						end
+                    if tonumber(group_id) == tonumber(one) then
+                        server.announce("[Admin Tools]","Attempting to remove vehicle: "..group_id,(peer_id))
+						server.despawnVehicleGroup(tonumber(one), true)
+                        table.remove(g_savedata["players"][_][3],a)
                     end
                 end
             end
